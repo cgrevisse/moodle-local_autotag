@@ -22,10 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- defined('MOODLE_INTERNAL') || die();
 
-
- /**
+/**
  * Add the AutoTag button to the add/edit resource page
  *
  * @param moodleform $formwrapper Moodleform wrapper

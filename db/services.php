@@ -33,6 +33,6 @@ $functions = [
         'description' => 'Sends a resource file to OpenAI to get tags.',
         'type'        => 'write',
         'ajax'        => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE]
+        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
     ],
 ];

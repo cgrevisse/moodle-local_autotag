@@ -21,6 +21,8 @@ use core_external\external_function_parameters;
 use core_external\external_multiple_structure;
 use core_external\external_value;
 
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->dirroot.'/local/autotag/lib.php');
 require_once($CFG->dirroot.'/local/autotag/vendor/autoload.php');
 
@@ -72,12 +74,15 @@ class tag_resource extends external_api {
         // Get OpenAI API key from plugin settings.
         $openaiapikey = get_config('local_autotag', 'openaiapikey');
 
-	    if (empty($openaiapikey)) {
+        if (empty($openaiapikey)) {
             throw new \Exception(get_string('noopenaiapikeyset', 'local_autotag'));
         }
 
         // Initialize OpenAI client.
-        $client = \OpenAI::client($openaiapikey);
+        $client = \OpenAI::factory()
+            ->withApiKey($openaiapikey)
+            ->withHttpClient(new \GuzzleHttp\Client(['timeout' => 600]))
+            ->make();
 
         // Get file content.
         $file = $fileinfo->path;
@@ -91,7 +96,8 @@ class tag_resource extends external_api {
             'input' => [
                 [
                     'role' => 'system',
-                    'content' => 'You are a tagging assistant. Your task is to extract a list of the most important tags for the given content.'
+                    'content' => 'You are a tagging assistant. Your task is to extract a list of the most important
+                                    tags for the given content. All tags shall be given in English.',
                 ],
                 [
                     'role' => 'user',
@@ -100,12 +106,11 @@ class tag_resource extends external_api {
                             'type' => 'input_file',
                             'filename' => $fileinfo->name,
                             'file_data' => 'data:application/pdf;base64,'.$b64,
-                        ]
+                        ],
                     ],
-                ]
+                ],
             ],
             'temperature' => 0.0,
-            //'max_output_tokens' => 150,
             'text' => [
                 "format" => [
                     'type' => 'json_schema',
@@ -118,14 +123,14 @@ class tag_resource extends external_api {
                                 'type' => 'array',
                                 'items' => [
                                     'type' => 'string',
-                                ]
+                                ],
                             ],
                         ],
                         'required' => ['tags'],
-                        'additionalProperties' => false
-                    ]                    
-                ]
-            ]
+                        'additionalProperties' => false,
+                    ],
+                ],
+            ],
         ]);
 
         $tags = [];

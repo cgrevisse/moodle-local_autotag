@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * TODO describe module selectors
+ * Selectors for the AutoTag feature.
  *
  * @module     local_autotag/selectors
  * @copyright  2025 Christian Grévisse <christian.grevisse@uni.lu>
