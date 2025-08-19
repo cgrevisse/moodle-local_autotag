@@ -34,3 +34,4 @@ $string['openaiapikey'] = 'OpenAI API key';
 $string['openaiapikey_help'] = 'To be created at <a href="https://platform.openai.com/api-keys" target="_blank">https://platform.openai.com/api-keys</a>.';
 $string['parsingerror'] = 'Error while parsing the generated tags.';
 $string['pluginname'] = 'AutoTag';
+$string['privacy:metadata'] = 'The AutoTag plugin does not store any personal data.';
