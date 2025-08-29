@@ -63,6 +63,10 @@ class tag_resource extends external_api {
     public static function execute($resourceid) {
         $params = self::validate_parameters(self::execute_parameters(), ['resourceid' => $resourceid]);
 
+        $context = \context_module::instance($resourceid);
+        self::validate_context($context);
+        require_capability('mod/resource:addinstance', $context);
+
         // Get file info for resource.
         $fileinfo = local_autotag_get_fileinfo_for_resource($params['resourceid']);
 
