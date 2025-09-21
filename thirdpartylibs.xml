@@ -3,7 +3,7 @@
     <library>
         <location>vendor/openai-php/client/</location>
         <name>openai-php/client</name>
-        <version>v0.13.0</version>
+        <version>v0.16.1</version>
         <license>MIT</license>
         <licenseversion></licenseversion>
     </library>
@@ -24,7 +24,7 @@
     <library>
         <location>vendor/symfony/http-client/</location>
         <name>symfony/http-client</name>
-        <version>v7.2.4</version>
+        <version>v7.3.3</version>
         <license>MIT</license>
         <licenseversion></licenseversion>
     </library>

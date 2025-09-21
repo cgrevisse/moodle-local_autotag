@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_autotag';
-$plugin->release = '0.1.2';
-$plugin->version = 2025082900;
+$plugin->release = '0.2.0';
+$plugin->version = 2025092100;
 $plugin->requires = 2022112800;
 $plugin->maturity = MATURITY_BETA;

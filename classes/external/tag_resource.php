@@ -96,7 +96,7 @@ class tag_resource extends external_api {
 
         // Call OpenAI to get tags.
         $response = $client->responses()->create([
-            'model' => 'gpt-4o',
+            'model' => 'gpt-5',
             'input' => [
                 [
                     'role' => 'system',
@@ -114,7 +114,6 @@ class tag_resource extends external_api {
                     ],
                 ],
             ],
-            'temperature' => 0.0,
             'text' => [
                 "format" => [
                     'type' => 'json_schema',
@@ -141,7 +140,7 @@ class tag_resource extends external_api {
 
         // Parse the response to get the tags.
         try {
-            $tags = json_decode($response->output[0]->content[0]->text)->tags;
+            $tags = json_decode($response->outputText)->tags;
         } catch (\Exception $e) {
             throw new \Exception(get_string('parsingerror', 'local_autotag'));
         }
