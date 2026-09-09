@@ -23,8 +23,8 @@ use core_external\external_value;
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot.'/local/autotag/lib.php');
-require_once($CFG->dirroot.'/local/autotag/vendor/autoload.php');
+require_once($CFG->dirroot . '/local/autotag/lib.php');
+require_once($CFG->dirroot . '/local/autotag/vendor/autoload.php');
 
 /**
  * Class tag_resource
@@ -34,7 +34,6 @@ require_once($CFG->dirroot.'/local/autotag/vendor/autoload.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tag_resource extends external_api {
-
     /**
      * Returns description of method parameters
      * @return external_function_parameters
@@ -96,7 +95,7 @@ class tag_resource extends external_api {
 
         // Call OpenAI to get tags.
         $response = $client->responses()->create([
-            'model' => 'gpt-5',
+            'model' => 'gpt-6-astra',
             'input' => [
                 [
                     'role' => 'system',
@@ -109,7 +108,7 @@ class tag_resource extends external_api {
                         [
                             'type' => 'input_file',
                             'filename' => $fileinfo->name,
-                            'file_data' => 'data:application/pdf;base64,'.$b64,
+                            'file_data' => 'data:application/pdf;base64,' . $b64,
                         ],
                     ],
                 ],
@@ -147,5 +146,4 @@ class tag_resource extends external_api {
 
         return $tags;
     }
-
 }
